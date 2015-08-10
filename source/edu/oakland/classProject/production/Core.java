@@ -14,8 +14,6 @@ package edu.oakland.classProject.production; // classProject be lowercase?
 *@since version 1.0
 */
 
-
-// upperbound 
 public class Core {
 
 	private static boolean hasGameEnded = false;// Flag for if a condition was encountered
@@ -68,15 +66,20 @@ public class Core {
 		
 		if(feedbackSelection.equalsIgnoreCase("lower")) {
 			numberGuessed = (int) Math.ceil(previousGuess - 
-							(inputUpperBound/currentGuess));
+							(inputUpperBound/Math.pow(2, currentGuess)));
 		}
 		else if(feedbackSelection.equalsIgnoreCase("higher")) {
 			numberGuessed = (int) Math.ceil(previousGuess + 
-							(inputUpperBound/currentGuess));
+							(inputUpperBound/Math.pow(2, currentGuess)));
 		}
 		previousGuess = numberGuessed;
 	}
 	
+	/**
+	* Calls a method that makes the next guess and returns
+	* that guess.
+	*@return returns the value of "numberGuessed" of type "int".
+	*/
 	public int getGuess() {
 		computeGuess();
 		return numberGuessed;
@@ -90,7 +93,9 @@ public class Core {
 	}
 	
 	/**
-	*
+	* Calls a method to iterate the guess counter and returns
+	* the value stored in the guess counter.
+	*@return returns the value of "currentGuess" of type "int".
 	*/
 	public int getGuessIteration() {
 		computeGuessIteration();
@@ -102,7 +107,7 @@ public class Core {
 	}
 		
 	private void computeHasGameEnded() {
-		if(currentGuess >= 10)
+		if(currentGuess >= maxNumGuesses)
 			hasGameEnded = true;
 		else if(feedbackSelection.equalsIgnoreCase("equal"))
 			hasGameEnded = true;
@@ -117,14 +122,14 @@ public class Core {
 	
 	/**
 	* For extra credit for when the user can set the upper bound.
+	*@param chosenUpperBound of type int is the upper bound.
 	*/
 	public void setUpperBoundInput(int chosenUpperBound) {
 		inputUpperBound = chosenUpperBound;
 	}
 	
 	/**
-	* Adjusts the upper bound to the specifed upper bound - 1.
-	*@return returns the value of "calcUpperBound" of type "int".
+	* Adjusts the upper bound to the specified upper bound - 1.
 	*/
 	private void computeUpperBoundComputed() {
 		calcUpperBound = inputUpperBound - 1;	
