@@ -96,7 +96,7 @@ public class Display {
 		System.out.println();
 	}	
 	/**
- 	* Prints for user to enter an option for upper bound
+ 	* 
  	* 
  	* 
  	*/
